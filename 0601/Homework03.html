@@ -33,14 +33,9 @@
             text-align: left;
         }
 
-        .card .text {
-            width: 100%;
-        }
-
         .card ul {
             display: flex;
             flex-wrap: wrap;
-            padding-inline-start: 0px;
         }
 
         .card ul li::marker {
@@ -61,16 +56,13 @@
         .card-link a {
             text-underline-offset: 3px;
             color: #00f;
-            text-decoration: none;  /*先整個不給底線*/
+            text-decoration: none;
+            /*先整個不給底線*/
         }
 
         .link-left {
-            text-decoration: underline; /*然後包span的地方再給底線*/
-        }
-
-        .card img {
-            height: 100%;
-            width: 100%;
+            text-decoration: underline;
+            /*然後包span的地方再給底線*/
         }
 
         .cardlist .card.card:nth-child(2n) {
@@ -92,14 +84,6 @@
             margin-block-end: 0px;
         }
 
-        .service p {
-            font-size: 15px;
-        }
-
-        .service img {
-            width: 100px;
-        }
-
         .service-cardlist {
             display: flex;
             flex-wrap: wrap;
@@ -107,7 +91,7 @@
 
         .service-card {
             width: 33%;
-            margin: auto;
+            margin: 10px 0 0 0;
             text-align: center;
         }
     </style>
