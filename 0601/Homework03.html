@@ -61,10 +61,11 @@
         .card-link a {
             text-underline-offset: 3px;
             color: #00f;
+            text-decoration: none;  /*先整個不給底線*/
         }
 
-        .link-right {
-            text-decoration: none;
+        .link-left {
+            text-decoration: underline; /*然後包span的地方再給底線*/
         }
 
         .card img {
@@ -75,7 +76,7 @@
             flex-direction: row-reverse;
         }
 
-        .card_list.card:nth-child(2N) {
+        .card_list.card:nth-child(2n) {
             flex-direction: row-reverse;
         }
 
@@ -133,8 +134,7 @@
                         <li>開放 HTML／CSS 編輯</li>
                     </ul>
                     <div class="card-link">
-                        <a href="#">看看開店祕技</a>
-                        <a href="#" class="link-right">⭢</a>
+                        <a href="#"><span class="link-left">看看開店祕技</span>⭢</a>
                     </div>
                 </div>
                 <div class="pic"><a href="#"><img src="SHOPLINE-PIC/sholine-01.webp" alt=""></a>
@@ -155,8 +155,7 @@
                         <li>發票開立與串接</li>
                     </ul>
                     <div class="card-link">
-                        <a href="#">了解更多金物流</a>
-                        <a href="#" class="link-right">⭢</a>
+                        <a href="#"><span class="link-left">了解更多金物流</span>⭢</a>
                     </div>
                 </div>
                 <div class="pic"><a href="#"><img src="SHOPLINE-PIC/sholine-02.webp" alt=""></a>
@@ -177,8 +176,7 @@
                         <li>FB／Google／LINE 廣告追蹤</li>
                     </ul>
                     <div class="card-link">
-                        <a href="#">看更多優惠模組</a>
-                        <a href="#" class="link-right">⭢</a>
+                        <a href="#"><span class="link-left">看更多優惠模組</span>⭢</a>
                     </div>
                 </div>
                 <div class="pic"><a href="#"><img src="SHOPLINE-PIC/sholine-03.webp" alt=""></a>
@@ -199,8 +197,7 @@
                         <li>訊息整合中心</li>
                     </ul>
                     <div class="card-link">
-                        <a href="#">看更多社群購物功能</a>
-                        <a href="#" class="link-right">⭢</a>
+                        <a href="#"><span class="link-left">看更多社群購物功能</span>⭢</a>
                     </div>
                 </div>
                 <div class="pic">
@@ -225,8 +222,7 @@
                         <li>Smart OMO 會員導購工具</li>
                     </ul>
                     <div class="card-link">
-                        <a href="#">了解更多全通路整合</a>
-                        <a href="#" class="link-right">⭢</a>
+                        <a href="#"><span class="link-left">了解更多全通路整合</span>⭢</a>
                     </div>
                 </div>
                 <div class="pic">
