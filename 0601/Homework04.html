@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Reveal Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            margin: 50px auto;
+            width: 960px;
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .event {
+            flex-direction: row-reverse;
+        }
+
+        .titleList {
+            width: 350px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            display: flex;
+            font-size: 36px;
+            background-color: red;
+            color: white;
+            align-items: center;
+        }
+
+        .event .title {
+            flex-direction: row-reverse;
+        }
+
+        .titleNum {
+            font-size: 100px;
+            transform: translateX(-10px) rotate(90deg);
+        }
+
+        .txt {
+            width: 310px;
+            padding: 20px 20px 40px;
+            color: #fff;
+            background-color: black;
+        }
+
+        .txt h3 {
+            font-size: 24px;
+            margin: 0 0 5px;
+        }
+
+        .txt p {
+            line-height: 1.5;
+            font-size: 20px;
+        }
+
+        .bgImg {
+            width: 500px;
+            height: 300px;
+            background-color: #f3f3f3;
+            position: relative;
+            top: 30px;
+            left: 160px;
+        }
+
+
+        .video {
+            width: 700px;
+            position: absolute;
+            right: 100px;
+            top: 100px;
+        }
+
+        .event .video {
+            left: 10px;
+        }
+
+        .video img {
+            width: 100%;
+        }
+
+        .btn {
+            width: 60px;
+            height: 40px;
+            background-color: #bb0404;
+            position: absolute;
+            top: 180px;
+            right: -10px;
+        }
+
+        .event .btn {
+            left: -10px;
+        }
+
+        .btn::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            clip-path: polygon(0 0, 20px 10px, 0 20px);
+            display: inline-block;
+            transform: translate(100%, 50%);
+        }
+
+        .info {
+            width: 600px;
+            background-color: #eeeeee;
+            padding: 15px;
+            position: relative;
+            left: 50px;
+            margin-top: 100px;
+        }
+
+        .event .info {
+            left: 0;
+            margin-top: 90px;
+        }
+
+        .info h4 {
+            color: red;
+            font-size: 22px;
+            margin: 0 0 10px;
+        }
+
+        .info h4::after {
+            display: inline-block;
+            content: "";
+            border-top: 2px solid red;
+            width: 350px;
+            margin: 0 10px;
+            transform: translateY(-5px);
+        }
+
+        .info span {
+            background-color: black;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .info dd {
+            margin: 8px 0 5px 0px;
+            color: gray;
+            text-indent: -1em;
+            padding: 0 0 0 1em;
+        }
+
+        .info dd::before {
+            content: '●';
+            margin: 0 5px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapList">
+        <div class="wrap">
+            <div class="titleList">
+                <div class="title">
+                    <div class="titleNum">01</div>
+                    <h2>操控樂趣</h2>
+                </div>
+                <div class="txt">
+                    <h3>人人滿意的駕駛體驗</h3>
+                    <p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳騁的行駛快感。</p>
+                </div>
+            </div>
+            <div class="bgImg"></div>
+            <div class="video">
+                <a href="#">
+                    <img src="https://img.youtube.com/vi/WH9kmoDw0fI/maxresdefault.jpg" alt="car1">
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <div class="info">
+                <h4>因為我們做了這些革新</h4>
+                <dl>
+                    <dt><span>低重心設計</span></dt>
+                    <dd>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛穩定性。</dd>
+                    <dt><span>車體剛性強化</span></dt>
+                    <dd>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數，提升車身抗扭剛性，強化駕馭穩定性及安全性。</dd>
+                    <dt><span>四輪獨立懸吊</span></dt>
+                    <dd>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="wrap event">
+            <div class="titleList">
+                <div class="title">
+                    <div class="titleNum">02</div>
+                    <h2>安全守護</h2>
+                </div>
+                <div class="txt">
+                    <h3>行車更安心的高剛性車體</h3>
+                    <p>您的愛車會妥善保護您，強悍穩固的車身可使您安全無虞。世界級的安全功能讓您輕鬆自如享受旅程、毫無後顧之憂。</p>
+                </div>
+            </div>
+            <div class="bgImg"></div>
+            <div class="video">
+                <a href="#">
+                    <img src="https://img.youtube.com/vi/A9-cReYqtnM/maxresdefault.jpg" alt="car1">
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <div class="info">
+                <h4>因為我們做了這些革新</h4>
+                <dl>
+                    <dt><span>主動安全</span></dt>
+                    <dd>以先進的 TSS 系統，主動偵測路況，輔助駕駛判斷路況並維持行車安全。</dd>
+                    <dt><span>被動安全</span></dt>
+                    <dd>堅固的高剛性車體，使用熱沖壓材料的高強度抗扭鋼板，強化座艙對意外事故的保護力。</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="titleList">
+                <div class="title">
+                    <div class="titleNum">03</div>
+                    <h2>乘坐舒適</h2>
+                </div>
+                <div class="txt">
+                    <h3>令人放鬆舒適的車室空間</h3>
+                    <p>車室空間設計著重人體工學，透過方向盤、踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計，提高座椅包覆性，致力實現長途駕駛不疲勞的舒適駕馭體驗。</p>
+                </div>
+            </div>
+            <div class="bgImg"></div>
+            <div class="video">
+                <a href="#">
+                    <img src="https://img.youtube.com/vi/SMNtG6-gS2M/maxresdefault.jpg" alt="car1">
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <div class="info">
+                <h4>因為我們做了這些革新</h4>
+                <dl>
+                    <dt><span>駕駛位置最佳化</span></dt>
+                    <dd>針對駕駛位置進行徹底的修改，讓駕馭者可如同握手般自然且舒適地操控方向盤。</dd>
+                    <dt><span>駕馭視野佳</span></dt>
+                    <dd>考量駕駛坐進車內的高度，透過前擋風玻璃位置的調整，達到盲區極小化、使駕駛視野更開闊，同步提升駕馭安全。</dd>
+                    <dd>針對駕駛位置進行徹底的修改，讓駕馭者可如同握手般自然且舒適地操控方向盤。</dd>
+                    <dt><span>更寧靜的車室</span></dt>
+                    <dd>採用最新三層結構的隔音材料，與引擎、變速箱的零件改革、將座艙的震動抑制在最小限度，提供乘客舒適安靜的感受。</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="wrap event">
+            <div class="titleList">
+                <div class="title">
+                    <div class="titleNum">04</div>
+                    <h2>以人為本</h2>
+                </div>
+                <div class="txt">
+                    <h3>使用者導向的貼心設計</h3>
+                    <p>藉由高度人性化的介面整合、傳遞車輛資訊，豐富日常駕駛體驗。從提升油耗表現到行李廂空間最適化，均細心考量，更加貼近使用者真正所需與習慣，並給予即時回應</p>
+                </div>
+            </div>
+            <div class="bgImg"></div>
+            <div class="video">
+                <a href="#">
+                    <img src="https://img.youtube.com/vi/MniLwJEoNgg/maxresdefault.jpg" alt="car1">
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <div class="info">
+                <h4>因為我們做了這些革新</h4>
+                <dl>
+                    <dt><span>優異油耗表現</span></dt>
+                    <dd>以 Corolla Sport 為例，更強勁的高效引擎將熱效率提升至 40 %，達到世界級水準，屢屢突破燃油效率新境界</dd>
+                    <dt><span>行季箱空間最適化</span></dt>
+                    <dd>以第四代 Prius 為例，透過將電池位置移到後座下方，讓行李箱擁有更大的空間。</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="titleList">
+                <div class="title">
+                    <div class="titleNum">05</div>
+                    <h2>引以為傲</h2>
+                </div>
+                <div class="txt">
+                    <h3>極具吸引力的精心設計</h3>
+                    <p>TNGA 車款擁有讓人忍不住回頭的新潮外觀、讓駕駛充滿自信的駕馭快感！不僅讓車主能展現個人風格，也能讓擁有者都能引以為傲。</p>
+                </div>
+            </div>
+            <div class="bgImg"></div>
+            <div class="video">
+                <a href="#">
+                    <img src="https://img.youtube.com/vi/eqFHWdDMXc0/maxresdefault.jpg" alt="car1">
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <div class="info">
+                <h4>因為我們做了這些革新</h4>
+                <dl>
+                    <dt><span>設計概念</span></dt>
+                    <dd>TNGA 低重心設計，不僅呈現更低伏的運動化外觀，更講究高品質內裝的一致性。</dd>
+                    <dt><span>環保穊念</span></dt>
+                    <dd>為了對環境保護盡一份心力，我們全面提升傳統引擎、變速箱與油電複合動力的動力效能。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
