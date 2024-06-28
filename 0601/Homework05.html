@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .output {
+            font-size: 20px;
+        }
+
+        .game {
+            border: 1px solid black;
+            width: 500px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game">
+        <h2>終極密碼</h2>
+        <h3>請輸入1~100之間的數字</h3>
+        <input class="txt" type="text">
+        <button class="btn check">猜數字</button>
+        <button class="btn remove">重新開始</button>
+        <button class="btn answer">看答案</button>
+        <div class="output"></div>
+    </div>
+    <script>
+        // 產生1~100
+        // 透過按鈕及輸入框等形式互動
+        // 沒猜到就繼續猜，猜到就結束
+        var answerNum = 0;  //答案
+        var minNum = 1; //最小值
+        var maxNum = 100;   //最大值
+        let count = 0;  //計算猜了幾次
+        const outputEl = document.querySelector(".output");
+        const btnCheck = document.querySelector(".check");
+
+        //產猜題數字
+        function randomNum() {
+            if (answerNum == 0) {
+                answerNum = Math.floor(Math.random() * 100);
+            }
+            console.log(answerNum);
+            return answerNum;
+        }
+
+        //檢查輸入與答案是否一致
+        function chcekAnswer() {
+            let txtNum = document.querySelector(".txt").value;
+            console.log(`txtNum:${txtNum}`);
+
+            if (txtNum == "" || isNaN(Number(txtNum))) {
+                outputEl.innerHTML += `輸入的${txtNum}為非數字<br />`;
+                console.log("非數字");
+                return;
+            }
+
+            if (txtNum > 100) {
+                outputEl.innerHTML += "輸入超過100<br />";
+                return;
+            }
+            if (txtNum < 0) {
+                outputEl.innerHTML += "輸入小於0<br />";
+                return;
+            }
+
+            count++;
+            if (txtNum == answerNum) {
+                outputEl.innerHTML += `答案正確，第${count}次猜對<br />`;
+                btnCheck.setAttribute("disabled", "disabled");
+            }
+            else {
+                if (txtNum < answerNum) {
+                    minNum = txtNum;
+                    console.log(`${minNum}~${maxNum}之間`);
+                }
+                else {
+                    maxNum = txtNum;
+                    console.log(`${minNum}~${maxNum}之間`);
+                }
+                outputEl.innerHTML += `${minNum}~${maxNum}之間<br />`;
+            }
+        }
+
+        //猜答案
+        btnCheck.addEventListener("click", randomNum);
+        btnCheck.addEventListener("click", chcekAnswer);
+
+        //看答案
+        const btnAnswer = document.querySelector(".answer");
+        btnAnswer.addEventListener("click", checkNum);
+        function checkNum() {
+            console.log(answerNum);
+            alert(answerNum);
+        }
+
+        //重新開始按鈕
+        const btnRemove = document.querySelector(".remove").addEventListener("click", function () {
+            answerNum = 0;
+            btnCheck.removeAttribute("disabled", "disabled");
+            outputEl.innerHTML = "";
+            document.querySelector(".txt").value = "";
+            count = 0;
+        })
+
+    </script>
+</body>
+
+</html>
