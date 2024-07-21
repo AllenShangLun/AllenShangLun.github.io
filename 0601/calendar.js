@@ -136,20 +136,20 @@ const addEvent = document.querySelector("#add-event");  //新增/修改按鈕
 const deleteEvent = document.querySelector("#delete-event");    //刪除按鈕
 const storageKey = "CalendarToDoList";
 const headerTodolist = document.querySelector("#header-todolist");
-const btnPlus = document.querySelector(".btn-plus");
+// const btnPlus = document.querySelector(".btn-plus");
 let eventId = null;
 // console.log(eventId);
 let plusDate = null;
 // console.log(plusDate);
 
-btnPlus.addEventListener("click", () => {
+// btnPlus.addEventListener("click", () => {
 
-    setAddInitDate(formatDate(TodayDate));
-});
+//     setAddInitDate(formatDate(TodayDate));
+// });
 
 // 代辦事項init
 function setAddInitDate(date) {
-    console.log(date);
+    // console.log(date);
     plusDateBtn.textContent = date;
     todo.value = "";
     colorMark.value = "#c0e9ed";
