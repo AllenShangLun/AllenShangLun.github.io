@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+    />
+    <style>
+      #map {
+        height: 400px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="mb-3">Youbike站點地圖串接練習</h1>
+      <div class="row">
+        <div class="col-6">
+          <div id="map"></div>
+        </div>
+        <div class="col-6">
+          <div class="h2 text-center">站點資訊</div>
+          <div id="loading_spinner" class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <table
+            id="my_table"
+            class="table table-striped mt-3 text-center d-none"
+          >
+            <thead>
+              <tr>
+                <th scope="col">區域</th>
+                <th scope="col">站點名稱</th>
+                <th scope="col">數量(剩餘/空位/總共)</th>
+                <th scope="col">地圖</th>
+                <th scope="col">經緯度</th>
+              </tr>
+            </thead>
+            <tbody class="data_rows">
+              <!-- <tr>
+                <td>A</td>
+                <td>A</td>
+                <td>A</td>
+                <td><i class="fa-solid fa-map-location-dot"></i></td>
+                <td><i class="fa-solid fa-circle-info"></i></td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>
+      const map = L.map("map");
+      const markers = L.markerClusterGroup();
+      window.onload = function () {
+        initMap();
+        fetchYoubikeData().then((data) => {
+          console.log(data);
+          clearMarkerGroup();
+          data.forEach((station) => {
+            renderingStationInfo(station);
+            addMarker(station);
+          });
+          document.querySelector("#my_table").classList.remove("d-none");
+          document.querySelector("#loading_spinner").classList.add("d-none");
+        });
+      };
+      function clearMarkerGroup() {
+        if (markers) {
+          markers.clearLayers();
+        }
+      }
+      function initMap() {
+        //設定圖資
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution:
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+        //設定中心位置
+        map.setView([25.0415001, 121.536222], 17);
+      }
+      function addMarker(station) {
+        const marker = L.marker([station.latitude, station.longitude]);
+
+        marker.bindPopup(
+          `<p class="h6">${station.sna}</p>剩餘/空位/總共:${station.available_rent_bikes}/${station.available_return_bikes}/${station.total}`
+        );
+
+        markers.addLayer(marker);
+        map.addLayer(markers);
+      }
+      function renderingStationInfo(station) {
+        const tr = document.createElement("tr");
+
+        const sareaTd = document.createElement("td");
+        sareaTd.textContent = `${station.sarea}`;
+
+        const stationNameTd = document.createElement("td");
+        stationNameTd.textContent = `${station.sna}`;
+
+        const infoTd = document.createElement("td");
+        infoTd.textContent = `${station.available_rent_bikes}/${station.available_return_bikes}/${station.total}`;
+
+        const mapTd = document.createElement("td");
+        const mapIcon = document.createElement("i");
+        
+        mapIcon.classList.add("fa-solid", "fa-map-location-dot");
+        mapIcon.addEventListener("click", () => {
+          map.flyTo([station.latitude, station.longitude], 18);
+        });
+        mapTd.append(mapIcon);
+
+        const latLngTd = document.createElement("td");
+        const latLngIcon = document.createElement("i");
+        latLngIcon.classList.add("fa-solid", "fa-circle-info");
+        latLngIcon.setAttribute("data-bs-toggle", "tooltip");
+        latLngIcon.setAttribute(
+          "data-bs-title",
+          `${station.latitude},${station.longitude}`
+        );
+        new bootstrap.Tooltip(latLngIcon);
+        latLngTd.append(latLngIcon);
+
+        tr.append(sareaTd, stationNameTd, infoTd, mapTd, latLngTd);
+        document.querySelector(".data_rows").append(tr);
+      }
+
+      function fetchYoubikeData() {
+        const taipeiYoubikeData =
+          "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json";
+        return fetch(taipeiYoubikeData).then((res) => res.json());
+      }
+    </script>
+  </body>
+</html>
